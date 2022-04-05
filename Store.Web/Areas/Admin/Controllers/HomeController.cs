@@ -1,13 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.Application.Services.Users.Queries.GetUsers;
 
 namespace Store.Web.Areas.Admin.Controllers
 {
     public class HomeController : Controller
     {
-        [Area("Admin")]
-        public IActionResult Index()
+        private readonly IGetUsersService _getUsersService;
+        public HomeController(IGetUsersService getUsersService)
         {
-            return View();
+            _getUsersService = getUsersService;
+        }
+
+        [Area("Admin")]
+        public IActionResult Index(string searchkey , int page = 1)
+        {
+            return View(_getUsersService.Execute( new RequestGetUsers
+            {
+                SearchKey = searchkey,
+                Page = page,
+            }));
         }
     }
 }

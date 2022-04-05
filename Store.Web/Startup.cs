@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Store.Application.Interfaces.Context;
+using Store.Application.Services.Users.Queries.GetUsers;
 using Store.Persistance.Context;
 using System;
 using System.Collections.Generic;
@@ -26,9 +27,16 @@ namespace Store.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Services
             services.AddScoped<IStoreDBContext, StoreDBContext>();
+            services.AddScoped<IGetUsersService, GetUsersService>();
+            #endregion
+
+            #region DataContext
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<StoreDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StoreConnectionString")));
+            #endregion
+
             services.AddControllersWithViews();
         }
 
