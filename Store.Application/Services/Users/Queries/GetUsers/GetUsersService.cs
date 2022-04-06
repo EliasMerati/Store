@@ -7,14 +7,14 @@ namespace Store.Application.Services.Users.Queries.GetUsers
 {
     public class GetUsersService : IGetUsersService
     {
-        private readonly IStoreDBContext _context;
-        public GetUsersService(IStoreDBContext context)
+        private readonly IStoreDBContext _db;
+        public GetUsersService(IStoreDBContext db)
         {
-            _context = context;
+            _db = db;
         }
         public ResultGetUsersDto Execute(RequestGetUsers request)
         {
-            var users = _context.Users.AsQueryable();
+            var users = _db.Users.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(request.SearchKey))
             {

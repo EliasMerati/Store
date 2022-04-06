@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Store.Application.Interfaces.Context;
+using Store.Application.Services.Users.Commands.RemoveUser;
+using Store.Application.Services.Users.Queries.GetRoles;
 using Store.Application.Services.Users.Queries.GetUsers;
 using Store.Persistance.Context;
 using System;
@@ -30,6 +32,8 @@ namespace Store.Web
             #region Services
             services.AddScoped<IStoreDBContext, StoreDBContext>();
             services.AddScoped<IGetUsersService, GetUsersService>();
+            services.AddScoped<IGetRolesService, GetRolesService>();
+            services.AddScoped<IRemoveUserService, RemoveUserService>();
             #endregion
 
             #region DataContext
