@@ -6,8 +6,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Store.Application.Interfaces.Context;
+using Store.Application.Services.Users.Commands.EditUser;
+using Store.Application.Services.Users.Commands.RegisterUser;
 using Store.Application.Services.Users.Commands.RemoveUser;
+using Store.Application.Services.Users.Commands.StatusChange;
 using Store.Application.Services.Users.Queries.GetRoles;
+using Store.Application.Services.Users.Queries.GetUserById;
 using Store.Application.Services.Users.Queries.GetUsers;
 using Store.Persistance.Context;
 using System;
@@ -29,11 +33,15 @@ namespace Store.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            #region Services
+            #region User Services
             services.AddScoped<IStoreDBContext, StoreDBContext>();
             services.AddScoped<IGetUsersService, GetUsersService>();
             services.AddScoped<IGetRolesService, GetRolesService>();
             services.AddScoped<IRemoveUserService, RemoveUserService>();
+            services.AddScoped<IRegisterUserService, RegisterUserService>();
+            services.AddScoped<IUserStatusChange, UserStatusChange>();
+            services.AddScoped<IEditUserService, EditUserService>();
+            services.AddScoped<IGetUserByIdService, GetUserByIdService>();
             #endregion
 
             #region DataContext

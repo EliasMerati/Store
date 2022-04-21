@@ -30,6 +30,9 @@ namespace Store.Persistance.Context
             //یونیک کردن فیلد ایمیل و یوزر نیم برای ثبت نام فقط یک بار
             modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
             modelBuilder.Entity<User>().HasIndex(x => x.FullName).IsUnique();
+
+            //نمایش فقط حذف نشده ها
+            modelBuilder.Entity<User>().HasQueryFilter(p => !p.IsRemoved);
         }
     }
 }
